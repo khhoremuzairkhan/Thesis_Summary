@@ -142,15 +142,15 @@ with tab4:
     )
 
     # Centered and responsive arrow (10% of screen width)
+# Center the image
     st.markdown(
-        """
-        <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
-            <img src="app/static/arrow.png" style="width:10%; min-width:50px; max-width:120px;">
-        </div>
-        """,
+        "<h5 style='text-align: center;'>▼</h5>",
         unsafe_allow_html=True
     )
 
-    st.write(
-        "Normalized the load profile as per respective standard loads of the IEEE 14 bus system"
-    )
+    st.image("down_arrow_key.png", 
+            caption=None, 
+            use_container_width=False, 
+            width=100)
+
+    st.write("Normalized the load profile as per respective standard loads of the IEEE 14 bus system")
