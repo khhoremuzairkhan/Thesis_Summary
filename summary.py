@@ -82,6 +82,26 @@ with tab3:
 
     try:
         df = pd.read_excel("Merged_All_ML_and_DL_Results.xlsx")
-        st.dataframe(df, use_container_width=True)
+
+        # Split into ML and DL DataFrames
+        ML_df = df[df["Model_Type"] == "ML Algorithm"].copy()
+        DL_df = df[df["Model_Type"] == "Neural Network"].copy()
+
+        # Drop irrelevant columns
+        if not ML_df.empty:
+            ML_df = ML_df.drop(columns=["Architecture", "Activation", "Dropout"], errors="ignore")
+        if not DL_df.empty:
+            DL_df = DL_df.drop(columns=["Model_Name"], errors="ignore")
+
+        # Selection radio button
+        option = st.radio("Select Model Type to View:", ["ML Algorithms", "Neural Networks"])
+
+        if option == "ML Algorithms":
+            st.subheader("Machine Learning Models")
+            st.dataframe(ML_df, use_container_width=True)
+        else:
+            st.subheader("Deep Learning Models")
+            st.dataframe(DL_df, use_container_width=True)
+
     except FileNotFoundError:
         st.error("❌ File 'Merged_All_ML_and_DL_Results.xlsx' not found in the current directory.")
