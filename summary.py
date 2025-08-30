@@ -125,6 +125,11 @@ with tab3:
     17. Passed energy values through a **Gaussian Noise Model**  
     18. Working on optimized regression solution with **MSE ≈ 1.0233 × 10⁻³** and **R² ≈ 0.99** (based on *"Estimation of Total Real and Reactive Power Losses in Electrical"*)  
     """)
+    # Add clickable link to PDF (opens in new tab)
+    st.markdown(
+        '[📄 See Paper](Estimation of Total Real and Reactive Power Losses in Electrical.pdf)',
+        unsafe_allow_html=True
+    )
 
     st.title("You can check the Trained Model Performance Tab above")
 # -------------------------------
