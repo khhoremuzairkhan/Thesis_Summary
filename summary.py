@@ -82,11 +82,11 @@ with tab3:
     st.markdown("""
     1. Took IEEE 14 bus system information from **PandaPower Library**  
     2. Took real-world load profile from [CAISO Demand Trend](https://www.caiso.com/todays-outlook#section-demand-trend) for the years **2020–2024**  
-    3. Normalized the load profile as per standard IEEE 14 bus system  
-    4. As per the paper *"Impact of Increased Penetration of Photovoltaic Generation on Power Systems"* (p.4), assumed **20% of the system power as Solar Capacity**  
-    5. Took solar load profile from [CAISO Renewables Trend](https://www.caiso.com/todays-outlook/supply#section-renewables-trend) for the years **2020–2024**  
-    6. Normalized the solar generation to maximum of **20% of 259 MW = 51.8 MW**  
+    3. Normalized the load profile as per standard IEEE 14 bus system
+    4. Took solar load profile from [CAISO Renewables Trend](https://www.caiso.com/todays-outlook/supply#section-renewables-trend) for the years **2020–2024**   
+    5. As per the paper *"Impact of Increased Penetration of Photovoltaic Generation on Power Systems"* (p.4), assumed **20% of the system power as Solar Capacity**  
     """)
+     
     
     # Add clickable link to PDF (opens in new tab)
     with open("Impact of Increased Penetration of Photovoltaic Generation on Power Systems.pdf", "rb") as pdf_file:
@@ -100,8 +100,8 @@ with tab3:
     )
     
     
-    
-    st.markdown("""
+    st.markdown(""" 
+    6. Normalized the solar generation to maximum of **20% of 259 MW = 51.8 MW**  
     7. Ran simulation for complete load profile of 5 years for active and reactive losses by placing solar on all **non-generator and non-swing buses**  
     """)
 
