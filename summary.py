@@ -97,11 +97,32 @@ with tab3:
         option = st.radio("Select Model Type to View:", ["ML Algorithms", "Neural Networks"])
 
         if option == "ML Algorithms":
+            selected_df = ML_df
             st.subheader("Machine Learning Models")
-            st.dataframe(ML_df, use_container_width=True)
+            st.dataframe(selected_df, use_container_width=True)
         else:
+            selected_df = DL_df
             st.subheader("Deep Learning Models")
-            st.dataframe(DL_df, use_container_width=True)
+            st.dataframe(selected_df, use_container_width=True)
+
+        # Selection of target and metric
+        target_option = st.radio("Select the intended target:", ["Active Loss", "Reactive Loss"])
+        metric_option = st.radio("Select the important metric:", ["MSE", "MAE", "R2"])
+
+        # Filter based on target
+        filtered_df = selected_df[selected_df["Target"] == target_option].copy()
+
+        if not filtered_df.empty and metric_option in filtered_df.columns:
+            # Sort ascending for metric
+            sorted_df = filtered_df.sort_values(by=metric_option, ascending=True)
+
+            # Dynamic heading
+            st.subheader(f"Lowest {metric_option} for predicting {target_option} using {option}")
+
+            # Show top 5
+            st.dataframe(sorted_df.head(5), use_container_width=True)
+        else:
+            st.warning(f"No data available for {option} with target '{target_option}' and metric '{metric_option}'.")
 
     except FileNotFoundError:
         st.error("❌ File 'Merged_All_ML_and_DL_Results.xlsx' not found in the current directory.")
