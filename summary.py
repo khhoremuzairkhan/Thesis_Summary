@@ -126,9 +126,14 @@ with tab3:
     18. Working on optimized regression solution with **MSE ≈ 1.0233 × 10⁻³** and **R² ≈ 0.99** (based on *"Estimation of Total Real and Reactive Power Losses in Electrical"*)  
     """)
     # Add clickable link to PDF (opens in new tab)
-    st.markdown(
-        '[📄 See Paper](Estimation of Total Real and Reactive Power Losses in Electrical.pdf)',
-        unsafe_allow_html=True
+    with open("Estimation of Total Real and Reactive Power Losses in Electrical.pdf", "rb") as pdf_file:
+    PDFbyte = pdf_file.read()
+
+    st.download_button(
+        label="📄 See Paper",
+        data=PDFbyte,
+        file_name="Estimation of Total Real and Reactive Power Losses in Electrical.pdf",
+        mime="application/pdf"
     )
 
     st.title("You can check the Trained Model Performance Tab above")
