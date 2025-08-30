@@ -80,126 +80,117 @@ with tab3:
     st.header("Work done is as follows")
 
     st.markdown("""
-    1. Took IEEE 14 bus system information from **PandaPower Library**  
-    2. Took real-world load profile from [CAISO Demand Trend](https://www.caiso.com/todays-outlook#section-demand-trend) for the years **2020–2024**  
-    3. Normalized the load profile as per standard IEEE 14 bus system
-    4. Took solar load profile from [CAISO Renewables Trend](https://www.caiso.com/todays-outlook/supply#section-renewables-trend) for the years **2020–2024**   
-    5. As per the paper *"Impact of Increased Penetration of Photovoltaic Generation on Power Systems"* (p.4), assumed **20% of the system power as Solar Capacity**  
-    """)
-     
-    
-    # Add clickable link to PDF (opens in new tab)
-    with open("Impact of Increased Penetration of Photovoltaic Generation on Power Systems.pdf", "rb") as pdf_file:
-        PDFbyte = pdf_file.read()
-
-    st.download_button(
-        label="📄 See Paper",
-        data=PDFbyte,
-        file_name="Impact of Increased Penetration of Photovoltaic Generation on Power Systems.pdf",
-        mime="application/pdf"
-    )
-    
-    
-    st.markdown(""" 
-    6. Normalized the solar generation to maximum of **20% of 259 MW = 51.8 MW**  
-    7. Ran simulation for complete load profile of 5 years for active and reactive losses by placing solar on all **non-generator and non-swing buses**  
+    1. Took IEEE 14 bus system information from Panda Power Library  
+    2. Took real world load profile from [CAISO Demand Trend](https://www.caiso.com/todays-outlook#section-demand-trend) for the years 2020 to 2024  
+    3. Normalized the load profile as per standard IEEE 14 bus system.  
+    4. As per the paper titled *"Impact of Increased Penetration of Photovoltaic Generation on Power Systems"* (p.4), 20% of the system power was taken as Solar Capacity.  
     """)
 
-    # Show Solar Placement Summary
+    # Solar Paper Button
+    try:
+        with open("Impact of Increased Penetration of Photovoltaic Generation on Power Systems.pdf", "rb") as pdf_file:
+            PDFbyte = pdf_file.read()
+        st.download_button(
+            label="📄 See Paper (Solar Impact)",
+            data=PDFbyte,
+            file_name="Impact of Increased Penetration of Photovoltaic Generation on Power Systems.pdf",
+            mime="application/pdf",
+            key="solar_paper"
+        )
+    except:
+        st.warning("Solar Impact paper not found in directory.")
+
+    st.markdown("""
+    5. Took solar load profile from [CAISO Solar Trend](https://www.caiso.com/todays-outlook/supply#section-renewables-trend) for the years 2020 to 2024  
+    6. Normalized the solar generation to maximum of 20% of 259 MW → 51.8 MW  
+    7. Ran simulation for complete load profile of 5 years for active/reactive losses by placing solar on all non-generator and non-swing buses.  
+    """)
+
+    # Display Solar Placement DataFrame
+    import pandas as pd
     try:
         solar_df = pd.read_excel("Solar Placement Summary.xlsx")
         st.subheader("Solar Placement Summary")
-        st.dataframe(solar_df, use_container_width=True)
-    except FileNotFoundError:
-        st.error("⚠️ Solar Placement Summary.xlsx not found in the directory.")
-    except Exception as e:
-        st.error(f"⚠️ Error loading Solar Placement Summary.xlsx: {e}")
+        st.dataframe(solar_df)
+    except:
+        st.warning("Solar Placement Summary.xlsx not found in directory.")
 
     st.markdown("""
-    8. Chose **Bus 3** for solar placement  
-    9. Took wind generation profile from [CAISO Renewables Trend](https://www.caiso.com/todays-outlook/supply#section-renewables-trend) for the years **2020–2024**  
-    10. Assumed Active Power from wind generation at **Unity Power Factor** (based on *"Short Circuit Current Contribution for Different Wind Turbine Generator Types"*, p.8)  
+    8. Chosen Bus 3 for solar placement  
+    9. Took wind generation profile from [CAISO Wind Trend](https://www.caiso.com/todays-outlook/supply#section-renewables-trend) for the years 2020 to 2024  
+    10. Assumed Active Power from wind generation (Unity PF) as per *"Short Circuit Current Contribution for Different Wind Turbine Generator Types"* (p.8).  
     """)
-    # Add clickable link to PDF (opens in new tab)
-    with open("Short Circuit Current Contribtuion for Different Wind Turbine Generator Types.pdf", "rb") as pdf_file:
-        PDFbyte = pdf_file.read()
 
-    st.download_button(
-        label="📄 See Paper",
-        data=PDFbyte,
-        file_name="Short Circuit Current Contribtuion for Different Wind Turbine Generator Types.pdf",
-        mime="application/pdf"
-    )
-    st.markdown(""" 
-    13. Ran load flow with solar on Bus 3 and wind on all buses except **generator, swing, and solar buses**  
-    """)
-    
-    
-    
-    
-    
+    # Wind Paper Button
+    try:
+        with open("Short Circuit Current Contribution for Different Wind Turbine Generator Types.pdf", "rb") as pdf_file:
+            PDFbyte = pdf_file.read()
+        st.download_button(
+            label="📄 See Paper (Wind Contribution)",
+            data=PDFbyte,
+            file_name="Short Circuit Current Contribution for Different Wind Turbine Generator Types.pdf",
+            mime="application/pdf",
+            key="wind_paper"
+        )
+    except:
+        st.warning("Wind Contribution paper not found in directory.")
+
     st.markdown("""
-    11. Sized Wind Capacity to **40% of system power** (based on *"Research on Optimal Wind Power Penetration Ratio..."*)  
-    12. This made the Wind Capacity = **40% of 259 MW = 103.6 MW** """)
-    
-    # Add clickable link to PDF (opens in new tab)
-    with open("Testing of Electrical Energy Meters Subject to Realistic Distorted Voltages and Currents.pdf", "rb") as pdf_file:
-        PDFbyte = pdf_file.read()
-
-    st.download_button(
-        label="📄 See Paper",
-        data=PDFbyte,
-        file_name="Testing of Electrical Energy Meters Subject to Realistic Distorted Voltages and Currents.pdf",
-        mime="application/pdf"
-    )
-    st.markdown(""" 
-    13. Ran load flow with solar on Bus 3 and wind on all buses except **generator, swing, and solar buses**  
+    11. Sized Wind Capacity to 40% of system power as per *"Research on Optimal Wind Power Penetration Ratio..."* → 103.6 MW  
+    12. Ran load flow with solar on Bus 3 and wind on all buses (except generator, swing, and solar bus).  
     """)
 
-    # Show Wind Placement Summary
+    # Display Wind Placement DataFrame
     try:
         wind_df = pd.read_excel("Wind Placement Summary.xlsx")
         st.subheader("Wind Placement Summary")
-        st.dataframe(wind_df, use_container_width=True)
-    except FileNotFoundError:
-        st.error("⚠️ Wind Placement Summary.xlsx not found in the directory.")
-    except Exception as e:
-        st.error(f"⚠️ Error loading Wind Placement Summary.xlsx: {e}")
+        st.dataframe(wind_df)
+    except:
+        st.warning("Wind Placement Summary.xlsx not found in directory.")
 
     st.markdown("""
-    14. Chose **Bus 13** for wind placement due to least reactive losses  
-    15. Carried out Load Flow for IEEE 14-bus system with load profile, wind, and solar generation for **5 years**  
-    16. Added maximum of **2.5% noise** to energy readings (based on *"Testing of Electrical Energy Meters Subject to Realistic Distorted Voltages and Currents"*,page 3 table 1 and table 2, EN 50470 / IEC 62053-21,-22)  
+    13. Chosen Bus 13 for wind placement due to least Reactive Losses  
+    14. Carried out load flow for full IEEE 14 bus system with load, solar & wind profiles over 5 years  
+    15. Took energy readings & added max 2.5% noise as per *"Testing of Electrical Energy Meters Subject to Realistic Distorted Voltages and Currents"* (EN 50470, IEC 62053-21,-22).  
     """)
-    
-    # Add clickable link to PDF (opens in new tab)
-    with open("Testing of Electrical Energy Meters Subject to Realistic Distorted Voltages and Currents.pdf", "rb") as pdf_file:
-        PDFbyte = pdf_file.read()
 
-    st.download_button(
-        label="📄 See Paper",
-        data=PDFbyte,
-        file_name="Testing of Electrical Energy Meters Subject to Realistic Distorted Voltages and Currents.pdf",
-        mime="application/pdf"
-    )
-    
-    
+    # Meter Testing Paper Button
+    try:
+        with open("Testing of Electrical Energy Meters Subject to Realistic Distorted Voltages and Currents.pdf", "rb") as pdf_file:
+            PDFbyte = pdf_file.read()
+        st.download_button(
+            label="📄 See Paper (Energy Meter Testing)",
+            data=PDFbyte,
+            file_name="Testing of Electrical Energy Meters Subject to Realistic Distorted Voltages and Currents.pdf",
+            mime="application/pdf",
+            key="meter_paper"
+        )
+    except:
+        st.warning("Energy Meter Testing paper not found in directory.")
+
     st.markdown("""
-    17. Passed energy values through a **Gaussian Noise Model**  
-    18. Working on optimized regression solution with **MSE ≈ 1.0233 × 10⁻³** and **R² ≈ 0.99** (based on *"Estimation of Total Real and Reactive Power Losses in Electrical"*)  
+    16. Passed noisy values through Gaussian Noise Model  
+    17. Developed optimized regression solution achieving MSE = 1.0233 × 10⁻³ and R² = 0.99 as per *"Estimation of Total Real and Reactive Power Losses in Electrical"*.  
     """)
-    # Add clickable link to PDF (opens in new tab)
-    with open("Estimation of Total Real and Reactive Power Losses in Electrical.pdf", "rb") as pdf_file:
-        PDFbyte = pdf_file.read()
 
-    st.download_button(
-        label="📄 See Paper",
-        data=PDFbyte,
-        file_name="Estimation of Total Real and Reactive Power Losses in Electrical.pdf",
-        mime="application/pdf"
-    )
+    # Loss Estimation Paper Button
+    try:
+        with open("Estimation of Total Real and Reactive Power Losses in Electrical.pdf", "rb") as pdf_file:
+            PDFbyte = pdf_file.read()
+        st.download_button(
+            label="📄 See Paper (Loss Estimation)",
+            data=PDFbyte,
+            file_name="Estimation of Total Real and Reactive Power Losses in Electrical.pdf",
+            mime="application/pdf",
+            key="loss_paper"
+        )
+    except:
+        st.warning("Loss Estimation paper not found in directory.")
 
-    st.title("You can check the Trained Model Performance Tab above")
+    st.markdown("""
+    18. ✅ You can check the **Trained Model Performance Tab** above for results  
+    """)
+
 # -------------------------------
 # TAB 4: Trained Model Performance
 # -------------------------------
