@@ -75,6 +75,9 @@ with tab2:
 # -------------------------------
 # TAB 3: Trained Model Performance
 # -------------------------------
+# -------------------------------
+# TAB 3: Trained Model Performance
+# -------------------------------
 with tab3:
     st.header("Trained Model Performance")
 
@@ -111,11 +114,16 @@ with tab3:
         filtered_df = selected_df[selected_df["Target"] == target_option].copy()
 
         if not filtered_df.empty and metric_option in filtered_df.columns:
-            # Sort ascending for metric
-            sorted_df = filtered_df.sort_values(by=metric_option, ascending=True)
             # Sorting condition
             ascending = False if metric_option == "R2" else True
             sorted_df = filtered_df.sort_values(by=metric_option, ascending=ascending)
 
             # Dynamic heading
             st.subheader(f"Lowest {metric_option} for predicting {target_option} using {option}")
+
+            st.dataframe(sorted_df.head(5), use_container_width=True)
+
+    except FileNotFoundError:
+        st.error("⚠️ The file `Merged_All_ML_and_DL_Results.xlsx` was not found. Please upload it.")
+    except Exception as e:
+        st.error(f"⚠️ An error occurred while loading the data: {e}")
