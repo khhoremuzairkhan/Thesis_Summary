@@ -84,8 +84,8 @@ with tab3:
         df = pd.read_excel("Merged_All_ML_and_DL_Results.xlsx")
 
         # Split into ML and DL DataFrames
-        ML_df = df[df["Model_Type"] == "ML Algorithm"].copy()
-        DL_df = df[df["Model_Type"] == "Neural Network"].copy()
+        ML_df = df[df["Model_Type"] == "ML_Algorithm"].copy()
+        DL_df = df[df["Model_Type"] == "Neural_Network"].copy()
 
         # Drop irrelevant columns
         if not ML_df.empty:
