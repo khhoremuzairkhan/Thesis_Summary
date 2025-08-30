@@ -4,3 +4,6 @@ pandas>=2.0
 pandapower>=2.12
 matplotlib>=3.8
 openpyxl>=3.1
+plotly>=5.20
+scikit-learn>=1.4
+pillow>=10.2

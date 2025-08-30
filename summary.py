@@ -134,23 +134,41 @@ with tab3:
 # TAB 4: Workflow
 # -------------------------------
 with tab4:
-    st.markdown("<h2 style='text-align: center;'>Workflow for the Project</h2>", unsafe_allow_html=True)
+    st.header("Workflow for the Project")
 
-    st.markdown(
-        "<p style='text-align: center;'>"
+    st.write(
         "Took real world load profile from 2020 to 2024 from "
-        "<a href='https://www.caiso.com/todays-outlook#section-demand-trend' target='_blank'>CAISO Demand Trend</a>"
-        "</p>", 
-        unsafe_allow_html=True
+        "[CAISO Demand Trend](https://www.caiso.com/TodaysOutlook/Pages/Demand.aspx)"
     )
 
-    st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
-    st.image("down_arrow_key.png", use_container_width=False)
-    st.markdown("</div>", unsafe_allow_html=True)
+    from PIL import Image
+    import base64
+    from io import BytesIO
 
+    # Load the arrow image
+    img = Image.open("dff5a376-8598-414c-829e-da6c31a290eb.png")
+
+    # Resize to 10% of original size
+    new_width = int(img.width * 0.1)
+    new_height = int(img.height * 0.1)
+    img_resized = img.resize((new_width, new_height))
+
+    # Convert resized image to base64 for HTML rendering
+    buffer = BytesIO()
+    img_resized.save(buffer, format="PNG")
+    img_b64 = base64.b64encode(buffer.getvalue()).decode()
+
+    # Centered display with HTML
     st.markdown(
-        "<p style='text-align: center;'>"
+        f"""
+        <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+            <img src="data:image/png;base64,{img_b64}" width="{new_width}">
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Text below the arrow
+    st.write(
         "Normalized the load profile as per respective standard loads of the IEEE 14 bus system"
-        "</p>", 
-        unsafe_allow_html=True
     )
