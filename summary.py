@@ -24,10 +24,11 @@ st.markdown("""
 # -------------------------------
 # Tabs
 # -------------------------------
-tab1, tab2, tab3 = st.tabs([
+tab1, tab2, tab3, tab4 = st.tabs([
     "IEEE 14 Bus Overview",
     "Research Overview",
-    "Trained Model Performance"
+    "Trained Model Performance",
+    "Workflow"
 ])
 
 # -------------------------------
@@ -127,3 +128,29 @@ with tab3:
 
     except FileNotFoundError:
         st.error("❌ File 'Merged_All_ML_and_DL_Results.xlsx' not found in the current directory.")
+
+
+# -------------------------------
+# TAB 4: Workflow
+# -------------------------------
+with tab4:
+    st.markdown("<h2 style='text-align: center;'>Workflow for the Project</h2>", unsafe_allow_html=True)
+
+    st.markdown(
+        "<p style='text-align: center;'>"
+        "Took real world load profile from 2020 to 2024 from "
+        "<a href='https://www.caiso.com/todays-outlook#section-demand-trend' target='_blank'>CAISO Demand Trend</a>"
+        "</p>", 
+        unsafe_allow_html=True
+    )
+
+    st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
+    st.image("down_arrow_key.png", use_container_width=False)
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    st.markdown(
+        "<p style='text-align: center;'>"
+        "Normalized the load profile as per respective standard loads of the IEEE 14 bus system"
+        "</p>", 
+        unsafe_allow_html=True
+    )
