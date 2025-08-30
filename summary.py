@@ -86,6 +86,22 @@ with tab3:
     4. As per the paper *"Impact of Increased Penetration of Photovoltaic Generation on Power Systems"* (p.4), assumed **20% of the system power as Solar Capacity**  
     5. Took solar load profile from [CAISO Renewables Trend](https://www.caiso.com/todays-outlook/supply#section-renewables-trend) for the years **2020–2024**  
     6. Normalized the solar generation to maximum of **20% of 259 MW = 51.8 MW**  
+    """)
+    
+    # Add clickable link to PDF (opens in new tab)
+    with open("Impact of Increased Penetration of Photovoltaic Generation on Power Systems.pdf", "rb") as pdf_file:
+        PDFbyte = pdf_file.read()
+
+    st.download_button(
+        label="📄 See Paper",
+        data=PDFbyte,
+        file_name="Impact of Increased Penetration of Photovoltaic Generation on Power Systems.pdf",
+        mime="application/pdf"
+    )
+    
+    
+    
+    st.markdown("""
     7. Ran simulation for complete load profile of 5 years for active and reactive losses by placing solar on all **non-generator and non-swing buses**  
     """)
 
@@ -103,8 +119,40 @@ with tab3:
     8. Chose **Bus 3** for solar placement  
     9. Took wind generation profile from [CAISO Renewables Trend](https://www.caiso.com/todays-outlook/supply#section-renewables-trend) for the years **2020–2024**  
     10. Assumed Active Power from wind generation at **Unity Power Factor** (based on *"Short Circuit Current Contribution for Different Wind Turbine Generator Types"*, p.8)  
+    """)
+    # Add clickable link to PDF (opens in new tab)
+    with open("Short Circuit Current Contribtuion for Different Wind Turbine Generator Types.pdf", "rb") as pdf_file:
+        PDFbyte = pdf_file.read()
+
+    st.download_button(
+        label="📄 See Paper",
+        data=PDFbyte,
+        file_name="Short Circuit Current Contribtuion for Different Wind Turbine Generator Types.pdf",
+        mime="application/pdf"
+    )
+    st.markdown(""" 
+    13. Ran load flow with solar on Bus 3 and wind on all buses except **generator, swing, and solar buses**  
+    """)
+    
+    
+    
+    
+    
+    st.markdown("""
     11. Sized Wind Capacity to **40% of system power** (based on *"Research on Optimal Wind Power Penetration Ratio..."*)  
-    12. This made the Wind Capacity = **40% of 259 MW = 103.6 MW**  
+    12. This made the Wind Capacity = **40% of 259 MW = 103.6 MW** """)
+    
+    # Add clickable link to PDF (opens in new tab)
+    with open("Testing of Electrical Energy Meters Subject to Realistic Distorted Voltages and Currents.pdf", "rb") as pdf_file:
+        PDFbyte = pdf_file.read()
+
+    st.download_button(
+        label="📄 See Paper",
+        data=PDFbyte,
+        file_name="Testing of Electrical Energy Meters Subject to Realistic Distorted Voltages and Currents.pdf",
+        mime="application/pdf"
+    )
+    st.markdown(""" 
     13. Ran load flow with solar on Bus 3 and wind on all buses except **generator, swing, and solar buses**  
     """)
 
@@ -121,7 +169,22 @@ with tab3:
     st.markdown("""
     14. Chose **Bus 13** for wind placement due to least reactive losses  
     15. Carried out Load Flow for IEEE 14-bus system with load profile, wind, and solar generation for **5 years**  
-    16. Added maximum of **2.5% noise** to energy readings (based on *"Testing of Electrical Energy Meters Subject to Realistic Distorted Voltages and Currents"*, EN 50470 / IEC 62053-21,-22)  
+    16. Added maximum of **2.5% noise** to energy readings (based on *"Testing of Electrical Energy Meters Subject to Realistic Distorted Voltages and Currents"*,page 3 table 1 and table 2, EN 50470 / IEC 62053-21,-22)  
+    """)
+    
+    # Add clickable link to PDF (opens in new tab)
+    with open("Testing of Electrical Energy Meters Subject to Realistic Distorted Voltages and Currents.pdf", "rb") as pdf_file:
+        PDFbyte = pdf_file.read()
+
+    st.download_button(
+        label="📄 See Paper",
+        data=PDFbyte,
+        file_name="Testing of Electrical Energy Meters Subject to Realistic Distorted Voltages and Currents.pdf",
+        mime="application/pdf"
+    )
+    
+    
+    st.markdown("""
     17. Passed energy values through a **Gaussian Noise Model**  
     18. Working on optimized regression solution with **MSE ≈ 1.0233 × 10⁻³** and **R² ≈ 0.99** (based on *"Estimation of Total Real and Reactive Power Losses in Electrical"*)  
     """)
