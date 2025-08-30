@@ -170,7 +170,7 @@ with tab3:
 
     st.markdown("""
     16. Passed noisy values through Gaussian Noise Model  
-    17. Developed optimized regression solution achieving MSE = 1.0233 × 10⁻³ and R² = 0.99 as per *"Estimation of Total Real and Reactive Power Losses in Electrical"*.  
+    17. Developing optimized regression solution achieving MSE = 1.0233 × 10⁻³ and R² = 0.99 as per *"Estimation of Total Real and Reactive Power Losses in Electrical"*.  
     """)
 
     # Loss Estimation Paper Button
@@ -187,9 +187,7 @@ with tab3:
     except:
         st.warning("Loss Estimation paper not found in directory.")
 
-    st.markdown("""
-    18. ✅ You can check the **Trained Model Performance Tab** above for results  
-    """)
+    st.header("You can check the **Trained Model Performance Tab** above for results")
 
 # -------------------------------
 # TAB 4: Trained Model Performance
