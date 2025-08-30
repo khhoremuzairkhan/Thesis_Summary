@@ -127,7 +127,7 @@ with tab3:
     """)
     # Add clickable link to PDF (opens in new tab)
     with open("Estimation of Total Real and Reactive Power Losses in Electrical.pdf", "rb") as pdf_file:
-    PDFbyte = pdf_file.read()
+        PDFbyte = pdf_file.read()
 
     st.download_button(
         label="📄 See Paper",
