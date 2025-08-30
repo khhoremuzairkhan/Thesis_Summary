@@ -1,5 +1,3 @@
-# summary.py
-
 import numpy as np
 import pandas as pd
 import pandapower as pp
@@ -24,11 +22,10 @@ st.markdown("""
 # -------------------------------
 # Tabs
 # -------------------------------
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2, tab3 = st.tabs([
     "IEEE 14 Bus Overview",
     "Research Overview",
-    "Trained Model Performance",
-    "Workflow"
+    "Trained Model Performance"
 ])
 
 # -------------------------------
@@ -114,33 +111,11 @@ with tab3:
         filtered_df = selected_df[selected_df["Target"] == target_option].copy()
 
         if not filtered_df.empty and metric_option in filtered_df.columns:
+            # Sort ascending for metric
+            sorted_df = filtered_df.sort_values(by=metric_option, ascending=True)
             # Sorting condition
             ascending = False if metric_option == "R2" else True
             sorted_df = filtered_df.sort_values(by=metric_option, ascending=ascending)
 
             # Dynamic heading
             st.subheader(f"Lowest {metric_option} for predicting {target_option} using {option}")
-
-            # Show top 5
-            st.dataframe(sorted_df.head(5), use_container_width=True)
-        else:
-            st.warning(f"No data available for {option} with target '{target_option}' and metric '{metric_option}'.")
-
-    except FileNotFoundError:
-        st.error("❌ File 'Merged_All_ML_and_DL_Results.xlsx' not found in the current directory.")
-
-
-# -------------------------------
-# TAB 4: Workflow
-# -------------------------------
-with tab4:
-    st.header("Workflow for the Project")
-
-    st.write(
-        "1. Took real world load profile from 2020 to 2024 from "
-        "[CAISO Demand Trend](https://www.caiso.com/TodaysOutlook/Pages/Demand.aspx)"
-    )
-
-   
-
-    st.write("2. Normalized the load profile as per respective standard loads of the IEEE 14 bus system")
