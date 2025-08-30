@@ -123,12 +123,12 @@ with tab3:
 
     # Wind Paper Button
     try:
-        with open("Short Circuit Current Contribution for Different Wind Turbine Generator Types.pdf", "rb") as pdf_file:
+        with open("Short Circuit Current Contribtuion for Different Wind Turbine Generator Types.pdf", "rb") as pdf_file:
             PDFbyte = pdf_file.read()
         st.download_button(
             label="📄 See Paper (Wind Contribution)",
             data=PDFbyte,
-            file_name="Short Circuit Current Contribution for Different Wind Turbine Generator Types.pdf",
+            file_name="Short Circuit Current Contribtuion for Different Wind Turbine Generator Types.pdf",
             mime="application/pdf",
             key="wind_paper"
         )
