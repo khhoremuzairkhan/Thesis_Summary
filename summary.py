@@ -1,30 +1,10 @@
-import numpy as np
-import pandas as pd
-import pandapower as pp
-import pandapower.networks as pn
-import pandapower.plotting as plot
-import streamlit as st
-import matplotlib.pyplot as plt
-
-# -------------------------------
-# Thesis Information
-# -------------------------------
-st.set_page_config(page_title="Thesis Summary", layout="wide")
-
-st.title("**Total Loss Estimation in Electrical Grids with Integrated Renewable Generation using AI**")
-
-st.markdown("""
-### **Supervisor:** Dr Shariq Mahmood Khan  
-### **Co-Supervisor:** Shariq Shaikh  
-### **Student:** Khhorem Uzair Khan  
-""")
-
 # -------------------------------
 # Tabs
 # -------------------------------
-tab1, tab2, tab3 = st.tabs([
+tab1, tab2, tab3, tab4 = st.tabs([
     "IEEE 14 Bus Overview",
     "Research Overview",
+    "Workflow",
     "Trained Model Performance"
 ])
 
@@ -73,12 +53,25 @@ with tab2:
 
 
 # -------------------------------
-# TAB 3: Trained Model Performance
-# -------------------------------
-# -------------------------------
-# TAB 3: Trained Model Performance
+# TAB 3: Workflow
 # -------------------------------
 with tab3:
+    st.header("Work done is as follows")
+    # Add your workflow description or steps here
+    st.markdown("""
+    1. Collected IEEE 14-bus test system data  
+    2. Integrated renewable generation (solar/wind)  
+    3. Performed power flow analysis  
+    4. Calculated active/reactive losses  
+    5. Trained ML/DL models for prediction  
+    6. Evaluated model performance  
+    """)
+
+
+# -------------------------------
+# TAB 4: Trained Model Performance
+# -------------------------------
+with tab4:
     st.header("Trained Model Performance")
 
     try:
