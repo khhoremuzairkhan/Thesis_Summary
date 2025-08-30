@@ -78,17 +78,55 @@ with tab2:
 # -------------------------------
 with tab3:
     st.header("Work done is as follows")
-    # Add your workflow description or steps here
+
     st.markdown("""
-    1. Collected IEEE 14-bus test system data  
-    2. Integrated renewable generation (solar/wind)  
-    3. Performed power flow analysis  
-    4. Calculated active/reactive losses  
-    5. Trained ML/DL models for prediction  
-    6. Evaluated model performance  
+    1. Took IEEE 14 bus system information from **PandaPower Library**  
+    2. Took real-world load profile from [CAISO Demand Trend](https://www.caiso.com/todays-outlook#section-demand-trend) for the years **2020–2024**  
+    3. Normalized the load profile as per standard IEEE 14 bus system  
+    4. As per the paper *"Impact of Increased Penetration of Photovoltaic Generation on Power Systems"* (p.4), assumed **20% of the system power as Solar Capacity**  
+    5. Took solar load profile from [CAISO Renewables Trend](https://www.caiso.com/todays-outlook/supply#section-renewables-trend) for the years **2020–2024**  
+    6. Normalized the solar generation to maximum of **20% of 259 MW = 51.8 MW**  
+    7. Ran simulation for complete load profile of 5 years for active and reactive losses by placing solar on all **non-generator and non-swing buses**  
     """)
 
+    # Show Solar Placement Summary
+    try:
+        solar_df = pd.read_excel("Solar Placement Summary.xlsx")
+        st.subheader("Solar Placement Summary")
+        st.dataframe(solar_df, use_container_width=True)
+    except FileNotFoundError:
+        st.error("⚠️ Solar Placement Summary.xlsx not found in the directory.")
+    except Exception as e:
+        st.error(f"⚠️ Error loading Solar Placement Summary.xlsx: {e}")
 
+    st.markdown("""
+    8. Chose **Bus 3** for solar placement  
+    9. Took wind generation profile from [CAISO Renewables Trend](https://www.caiso.com/todays-outlook/supply#section-renewables-trend) for the years **2020–2024**  
+    10. Assumed Active Power from wind generation at **Unity Power Factor** (based on *"Short Circuit Current Contribution for Different Wind Turbine Generator Types"*, p.8)  
+    11. Sized Wind Capacity to **40% of system power** (based on *"Research on Optimal Wind Power Penetration Ratio..."*)  
+    12. This made the Wind Capacity = **40% of 259 MW = 103.6 MW**  
+    13. Ran load flow with solar on Bus 3 and wind on all buses except **generator, swing, and solar buses**  
+    """)
+
+    # Show Wind Placement Summary
+    try:
+        wind_df = pd.read_excel("Wind Placement Summary.xlsx")
+        st.subheader("Wind Placement Summary")
+        st.dataframe(wind_df, use_container_width=True)
+    except FileNotFoundError:
+        st.error("⚠️ Wind Placement Summary.xlsx not found in the directory.")
+    except Exception as e:
+        st.error(f"⚠️ Error loading Wind Placement Summary.xlsx: {e}")
+
+    st.markdown("""
+    14. Chose **Bus 13** for wind placement due to least reactive losses  
+    15. Carried out Load Flow for IEEE 14-bus system with load profile, wind, and solar generation for **5 years**  
+    16. Added maximum of **2.5% noise** to energy readings (based on *"Testing of Electrical Energy Meters Subject to Realistic Distorted Voltages and Currents"*, EN 50470 / IEC 62053-21,-22)  
+    17. Passed energy values through a **Gaussian Noise Model**  
+    18. Working on optimized regression solution with **MSE ≈ 1.0233 × 10⁻³** and **R² ≈ 0.99** (based on *"Estimation of Total Real and Reactive Power Losses in Electrical"*)  
+    """)
+
+    st.title("You can check the Trained Model Performance Tab above")
 # -------------------------------
 # TAB 4: Trained Model Performance
 # -------------------------------
