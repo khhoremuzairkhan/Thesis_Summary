@@ -137,20 +137,10 @@ with tab4:
     st.header("Workflow for the Project")
 
     st.write(
-        "Took real world load profile from 2020 to 2024 from "
+        "1. Took real world load profile from 2020 to 2024 from "
         "[CAISO Demand Trend](https://www.caiso.com/TodaysOutlook/Pages/Demand.aspx)"
     )
 
-    # Centered and responsive arrow (10% of screen width)
-# Center the image
-    st.markdown(
-        "<h5 style='text-align: center;'>▼</h5>",
-        unsafe_allow_html=True
-    )
+   
 
-    st.image("down_arrow_key.png", 
-            caption=None, 
-            use_container_width=False, 
-            width=100)
-
-    st.write("Normalized the load profile as per respective standard loads of the IEEE 14 bus system")
+    st.write("2. Normalized the load profile as per respective standard loads of the IEEE 14 bus system")
