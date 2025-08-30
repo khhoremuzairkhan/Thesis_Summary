@@ -1,3 +1,24 @@
+import numpy as np
+import pandas as pd
+import pandapower as pp
+import pandapower.networks as pn
+import pandapower.plotting as plot
+import streamlit as st
+import matplotlib.pyplot as plt
+
+# -------------------------------
+# Thesis Information
+# -------------------------------
+st.set_page_config(page_title="Thesis Summary", layout="wide")
+
+st.title("**Total Loss Estimation in Electrical Grids with Integrated Renewable Generation using AI**")
+
+st.markdown("""
+### **Supervisor:** Dr Shariq Mahmood Khan  
+### **Co-Supervisor:** Shariq Shaikh  
+### **Student:** Khhorem Uzair Khan  
+""")
+
 # -------------------------------
 # Tabs
 # -------------------------------
